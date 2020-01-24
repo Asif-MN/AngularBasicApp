@@ -1,0 +1,70 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<h2>
+  User Registration
+</h2>
+<div style="color:teal">Current date is {{ currentDateTime }}</div>
+<form [formGroup]="userForm" (ngSubmit)="saveUser()">
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input class="form-control" name="firstName" id="firstName" type="text" formControlName="firstName">
+    <div *ngIf="!userForm.controls.firstName.valid"  class="alert alert-danger">
+      <span *ngIf="userForm.controls.firstName.errors.required">
+        First Name is required
+      </span>
+    </div>
+  </div>    
+  <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input class="form-control" name="lastName" id="lastName" type="text" formControlName="lastName">
+      <div *ngIf="!userForm.controls.lastName.valid" class="alert alert-danger">
+        <span *ngIf="userForm.controls.lastName.errors.required">
+          Last Name is required
+        </span>
+      </div>
+    </div>    
+  <div class="form-group">
+    <label for="address">Address</label>
+    <textarea class="form-control" name="address" id="address" formControlName="address" rows="6" placeholder="Type your address here.."></textarea>    
+    <div *ngIf="!userForm.controls.address.valid" class="alert alert-danger">
+      <span *ngIf="userForm.controls.address.errors.required">
+        Address is required
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="country">Country</label>
+    <select class="form-control" name="country" id="country" formControlName="country" (change)="fillState($event.target.value)">      
+      <option [value]="country" *ngFor="let country of countries">{{country}}</option>
+    </select>
+    <div *ngIf="!userForm.controls.country.valid" class="alert alert-danger">
+      <span *ngIf="userForm.controls.country.errors.required">
+        Country is required
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+      <label for="state">State</label>
+      <select class="form-control" name="state" id="state" formControlName="state" >        
+        <option [value]="state" *ngFor="let state of states">{{state}}</option>        
+      </select>
+      <div *ngIf="!userForm.controls.country.valid" class="alert alert-danger">
+        <span *ngIf="userForm.controls.country.errors.required">
+          State is required
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+        <label for="zipcode">Zip Code</label>
+        <input class="form-control" name="zipcode" id="zipcode" type="text" formControlName="zipcode">
+        <div *ngIf="!userForm.controls.zipcode.valid" class="alert alert-danger">
+          <span *ngIf="userForm.controls.zipcode.errors.required">
+            Zip Code is required
+          </span>
+        </div>        
+     </div>
+     <br/>
+     <div>
+        <button type="submit" class="btn btn-default" [disabled]="!userForm.valid" >Submit</button>    
+     </div>
+</form>
+
